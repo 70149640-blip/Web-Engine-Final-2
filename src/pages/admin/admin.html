@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebEngine - Admin Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <script type="module" src="../constants/themeConstants.js"></script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 font-sans transition-colors duration-300">
+
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 dark:bg-gray-800 dark:border-gray-700">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="../../../index.html" class="flex items-center space-x-3">
+                <span class="self-center text-2xl font-semibold whitespace-nowrap text-blue-700 dark:text-blue-400">WebEngine.</span>
+            </a>
+            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/></svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 dark:border-gray-700 items-center">
+                    <li><a href="../../../index.html" class="block py-2 px-3 text-gray-900 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400">Home</a></li>
+                    <li><a href="../about/about.html" class="block py-2 px-3 text-gray-900 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400">About</a></li>
+                    <li><a href="../contact/contact.html" class="block py-2 px-3 text-gray-900 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400">Contact</a></li>
+                    <li><a href="./admin.html" class="block py-2 px-3 text-blue-700 dark:text-blue-400 font-bold">Admin</a></li>
+                    <li><a href="../../../account/signin.html" class="block py-2 px-3 text-gray-900 dark:text-gray-300 hover:text-blue-700 dark:hover:text-blue-400">Sign In</a></li>
+                    
+                    <button id="theme-toggle" class="p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                        <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                        <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 2.293a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zm-7.414 2.121a1 1 0 010 1.414l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464a1 1 0 10-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707zM10 8a2 2 0 100 4 2 2 0 000-4z"></path></svg>
+                    </button>
+
+                    <li><a href="../../../account/signup.html" class="text-white bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-lg">Sign Up</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto p-6 mt-6">
+        
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h2 class="text-xl font-bold text-gray-800 dark:text-white">Website Content Management</h2>
+                <p class="text-sm text-gray-500 dark:text-gray-400">Add, edit, or remove features from the homepage.</p>
+            </div>
+            <button onclick="openAddModal()" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all transform active:scale-95 flex items-center gap-2 dark:bg-blue-600 dark:hover:bg-blue-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                </svg>
+                Add New Content
+            </button>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
+            <table class="w-full text-left">
+                <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 uppercase text-xs font-bold">
+                    <tr>
+                        <th class="px-6 py-4">Content Title</th>
+                        <th class="px-6 py-4">Description</th>
+                        <th class="px-6 py-4 text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="contentTableBody" class="text-gray-600 dark:text-gray-300 divide-y dark:divide-gray-700">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="crudModal" class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm hidden flex items-center justify-center z-50">
+        <div class="bg-white dark:bg-gray-800 w-full max-w-md p-8 rounded-3xl shadow-2xl relative border dark:border-gray-700">
+            <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Add New Content</h2>
+            <form id="adminForm" class="space-y-4">
+                <input type="hidden" id="editId">
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Title</label>
+                    <input type="text" id="title" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-xl p-3 outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">Description</label>
+                    <textarea id="description" rows="4" class="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-xl p-3 outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                </div>
+                <div class="flex justify-end gap-3 pt-4">
+                    <button type="button" onclick="closeModal()" class="px-6 py-2.5 rounded-xl font-bold text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700">Cancel</button>
+                    <button type="submit" class="bg-blue-700 text-white px-8 py-2.5 rounded-xl font-bold hover:bg-blue-800 dark:bg-blue-600">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-white dark:bg-gray-800 border-t dark:border-gray-700 p-8 mt-12 transition-colors">
+        <div class="max-w-screen-xl mx-auto text-center">
+            <span class="text-sm text-gray-500 dark:text-gray-400">© 2026 UOL Web Engineering Assignment. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <script src="../database/database.js"></script>
+    <script src="admin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+</body>
+</html>
